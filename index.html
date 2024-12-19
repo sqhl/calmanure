@@ -1,75 +1,131 @@
 <!--
  * @Author: 佘伟
- * @Date: 2024-12-18 16:08:58
+ * @Date: 2024-09-05 17:24:31
  * @LastEditors: 佘伟
- * @LastEditTime: 2024-12-18 16:36:50
+ * @LastEditTime: 2024-12-19 09:22:27
  * @Description: 
 -->
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8"> 
-	<title>Bootstrap 实例 - 基本表单</title>
-	<!-- <link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/css/bootstrap.min.css">   -->
-	<!-- <script src="https://cdn.staticfile.net/jquery/2.1.1/jquery.min.js"></script> -->
-	<!-- <script src="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <meta charset="utf-8">
+    <title>Bootstrap 实例 - 基本表单</title>
 
     <style>
-        .form-box{
+        html,body{
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+        .form-box {
+            margin: 0 auto;
             text-align: center;
             width: 100%;
             font-size: 24px;
-            padding: 48px 24px;
+            padding: 24px;
+            max-width: 1200px;
         }
-        .res-box{
-            width: 100%;
-            height: 120px;
+
+        .res-box {
+            padding: 24px;
+            font-size: 28px;
+            line-height: 36px;
+            font-weight: 700;
+            text-align: left;
             border-bottom-left-radius: 5px;
+            color: #555;
             border-bottom-right-radius: 5px;
-            background: rgba(0,255,0, .1);
+            background: rgba(0, 255, 0, .1);
+        }
+
+        .form-group_self {
+            margin-bottom: 18px;
+            width: 100%;
+        }
+
+        .form-control_self {
+            margin-top: 12px;
+            border-radius: 5px;
+            width: 100%;
+            padding: 0 8px;
+            height: 36px;
+            border: 1px solid #ddd;
+        }
+
+        #btn{
+            cursor: pointer;
+            width: 100%;
+            height: 48px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        #mol{
+            margin: 0 8px;
+        }
+        #kg{
+            margin: 0 8px;
         }
     </style>
 </head>
+
 <body>
-<div class="form-box">
-    <h2>肥料计算器</h2>
-    <form role="form">
-        <div class="form-group" style="text-align: left;">
+    <div class="form-box">
+        <h2>肥料计算器</h2>
+        <div class="form-group_self" style="text-align: left;">
             <label for="name">元素含量（%）</label>
-            <input type="text" class="form-control" id="name" 
-                placeholder="请输入元素含量（%）">
+            <input type="number" class="form-control_self" id="ys" placeholder="请输入元素含量（%）">
         </div>
-        <div class="form-group" style="text-align: left;">
+        <div class="form-group_self" style="text-align: left;">
             <label for="name">稀释倍数</label>
-            <input type="text" class="form-control" id="name" 
-                placeholder="请输入稀释倍数">
+            <input type="number" value="100" class="form-control_self" id="xs" placeholder="请输入稀释倍数">
         </div>
-        <div class="form-group" style="text-align: left;">
+        <div class="form-group_self" style="text-align: left;">
             <label for="name">母液体积（L）</label>
-            <input type="text" class="form-control" id="name" 
-                placeholder="请输入母液体积（L）">
+            <input type="number" value="1000" class="form-control_self" id="my" placeholder="请输入母液体积（L）">
         </div>
-        <div class="form-group" style="text-align: left;">
+        <div class="form-group_self" style="text-align: left;">
             <label for="name">相对分子质量（g/mol）</label>
-            <input type="text" class="form-control" id="name" 
-                placeholder="请输入相对分子质量（g/mol）">
+            <input type="number" class="form-control_self" id="fz" placeholder="请输入相对分子质量（g/mol）">
         </div>
-        <div class="form-group" style="text-align: left;">
-            <label for="name">原子质量（g/mol）</label>
-            <input type="text" class="form-control" id="name" 
-                placeholder="请输入原子质量（g/mol）">
+        <div class="form-group_self" style="text-align: left;">
+            <label for="name">相对原子质量（g/mol）</label>
+            <input type="number" class="form-control_self" id="yz" placeholder="请输入原子质量（g/mol）">
         </div>
-        <div class="form-group" style="text-align: left;">
+        <div class="form-group_self" style="text-align: left;">
             <label for="name">所需浓度（mmol/L）</label>
-            <input type="text" class="form-control" id="name" 
-                placeholder="请输入所需浓度（mmol/L）">
+            <input type="number" class="form-control_self" id="sx" placeholder="请输入所需浓度（mmol/L）">
         </div>
-        <button type="submit" style="width: 100%;" class="btn btn-lg btn-success">提交</button>
+        <button style="width: 100%;" class="btn" id="btn">提交</button>
         <div class="res-box">
-        
+            所得浓度：<span id="mol">--</span> mmol/L<br />
+            所需肥料质量：<span id="kg">--</span> kg
         </div>
-    </form>
-</div>
-	
+    </div>
+    <script>
+        document.getElementById("btn").onclick = () => {
+            let ys = document.getElementById("ys").value;
+            let xs = document.getElementById("xs").value;
+            let my = document.getElementById("my").value;
+            let fz = document.getElementById("fz").value;
+            let yz = document.getElementById("yz").value;
+            let sx = document.getElementById("sx").value;
+
+            console.log(ys, xs, my, fz, yz, sx)
+
+            if (ys && xs && my && fz && yz && sx) {
+                console.log(11111)
+                let nd = 1 * ys / 100 * 1000 / yz / xs / my * 1000;
+                console.log(nd)
+                document.getElementById("mol").innerHTML = nd.toFixed(6);
+                document.getElementById("kg").innerHTML = (sx / nd * fz / yz).toFixed(4)
+            } else {
+                alert('请输入所有的正确参数');
+            }
+        }
+    </script>
 </body>
+
 </html>
